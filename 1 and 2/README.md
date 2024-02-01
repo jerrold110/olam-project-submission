@@ -28,15 +28,10 @@ Indexes and paritiions are added to the tables to facilitate better performance 
 Database loading:
 The dataset contains missing rows in name and industry columns. It also contans rows where the industry value is in the name column. 
 
-![My Image](/images/image2.png "Image")
+![My Image](/images/image2.png "Database")
 
 When populating the company table, we must take care to ensure clean data is loaded. The initial scan will drop rows with missing data, lowercase the name and industry, extract the unique values. And if there are still multiple strings to choose from to fill Name and Industry, the value that matches the first two characters of the Ticker will be used for the name column.
 
-![My Image](/images/image3.png "Image")
-
-
-
-
-
+![My Image](/images/image3.png "Database")
 
 
