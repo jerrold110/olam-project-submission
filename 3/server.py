@@ -42,9 +42,10 @@ def handle_client(client_socket):
 def broadcast_update(symbol, update):
     if symbol in subscriptions:
         for client_socket in subscriptions[symbol]:
-            # send an update for a sybol to a client
+            # send an update for a symbol to a client
+            # newline character is used to seperate json objects if multiple are received in a single call
             try:
-                client_socket.send(json.dumps(update).encode('utf-8'))
+                client_socket.send((json.dumps(update)+'\n').encode('utf-8'))
             except:
                 subscriptions[symbol].remove(client_socket)
 

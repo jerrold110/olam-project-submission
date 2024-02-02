@@ -37,7 +37,8 @@ def simulate_human_activity():
     unsubscribe('AAPL')
 
 # create a client socket and connect
-# connect instead of create_connection 
+# connect() instead of create_connection()
+print('Client started...')
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((HOST, PORT))
 
@@ -51,11 +52,17 @@ while True:
     # receive up to 1024 bytes from the server using recv()
     # received data is decoded from bytes to string using utf-8
     data = client_socket.recv(1024).decode('utf-8')
+
     # checks if received data is empty
     if not data:
         break
-    update = json.loads(data)
-    print(f"Received update: {update}")
+    lines = data.split('\n')
+    # if \n is the end of the string, .split(\n) returns an array with empty string as the last item
+    for l in lines[:-1]:
+        if l != '':
+            update = json.loads(l)
+            print(f'Received update: {update}')
+    
     symbol = update['symbol']
     if symbol in quotes:
         quotes['symbol'] = update
