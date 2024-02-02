@@ -2,7 +2,7 @@
 This program simulates a client-server architecture that broadcasts and receives data in real time and is designed for multiple client connections, with multiple client-managed subscriptions to control what data the server broadcasts to the itself. I use Python to set up clients and server with a streaming TCP connection between them, with functionality to store data locally.
 
 ### Interface
-The data transferred between client and server is in JSON format. The data is seralised in UTF-8, sent through the stream, and deseralised upon receiving. This data is used to communicate instructions or send quotation data in real-time. 
+The data transferred between client are JSON strings seralised in UTF-8. They sent through the stream, and deseralised upon receiving. This data is used to communicate instructions or send quotation data in real-time. Because this is a stream, the TCP connection cannot preserve boundaries between strings, so a newline character is used to separate string, and parsing is done at the client.
 
 Client transmissions to server are a subscribe or unsubscribe action to a particular stock and will control what quotation data it will receive.
 ```python

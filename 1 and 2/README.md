@@ -1,5 +1,3 @@
-## DB Design and queries
-
 ### DB design:
 This design approach uses entity-relationship modelling to model the entities in the data. We have 4 categories:
 * Symbol data which uniquely identifies stocks
@@ -7,7 +5,7 @@ This design approach uses entity-relationship modelling to model the entities in
 * Numerical data for each (stock, reporting_month)
 * String data (company name, industry). The relationship between industry to name is one-to-many
 
-Transactions:
+### Transactions:
 
 The table is normalised to 3NF and meets the conditions: atomic values, no partial dependencies, no transitive dependencies. The string table and the duration table have symbol as the key, the numeric data as symbol and report_date as the key. 
 
@@ -19,13 +17,13 @@ Index_duration table is a seperate table to company table even though both have 
 
 ![My Image](/images/image1.png "Schema")
 
-Constraints, optimisations:
+### Constraints and optimisations:
 
 There are primary and foreign key constraints on the tables as per the diagrams.
 
 Indexes and paritiions are added to the tables to facilitate better performance of the queries, while keeping in mind the overhead incurred whenever the tables are updated. Index added on (industry) to speed up grouping operations on indusstry. I considered added an index on (symbol, date) to speed up all time based queries (SMA, high, low, correlation), but the overhead is too high. I added a ranged partition by year on the reporting_date column, to improve performance when querying by year.
 
-Database loading:
+### Database loading:
 The dataset contains missing rows in name and industry columns. It also contans rows where the industry value is in the name column. 
 
 ![My Image](/images/image2.png "Database")
