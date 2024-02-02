@@ -1,0 +1,3 @@
+Equity column contains string data in the from 500,000
+There are numerical values which are just -
+Free float cap has floats where there should only be ints

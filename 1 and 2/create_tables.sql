@@ -7,17 +7,17 @@ CREATE TABLE IF NOT EXISTS staging (
     symbol VARCHAR(255),
     name VARCHAR(255),
     industry VARCHAR(255),
-    report_date DATE,
-    equity_cap BIGINT,
-    free_float_cap INT,
+    equity_cap VARCHAR(255), 
+    free_float_cap NUMERIC(20),
+    weightage NUMERIC(5,2),
     beta NUMERIC(8,5),
+    r2 NUMERIC(8,5),
     volatility_per NUMERIC(8,5),
     monthly_return NUMERIC(8,5),
-    weightage NUMERIC(5,2),
-    r2 NUMERIC(8,5),
-    avg_impacy NUMERIC(5,2)
+    avg_impacy NUMERIC(5,2),
+    report_date DATE
 );
-
+/*
 CREATE TABLE IF NOT EXISTS company (
     symbol VARCHAR(255),
     name VARCHAR(255),
@@ -79,3 +79,4 @@ CREATE TABLE IF NOT EXISTS index_duration (
     FOREIGN KEY (symbol) REFERENCES company(symbol)
 );
 CREATE INDEX idx_index_duration_symbol ON index_duration(symbol);
+*/
