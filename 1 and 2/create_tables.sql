@@ -4,7 +4,6 @@ DROP TABLE company_industry;
 DROP TABLE company;
 DROP TABLE staging;
 
-
 CREATE TABLE IF NOT EXISTS staging (
     symbol VARCHAR(100),
     name VARCHAR(255),  
@@ -87,7 +86,9 @@ CREATE TABLE IF NOT EXISTS index_duration (
     symbol VARCHAR(100),
     start_date DATE,
     end_date DATE,
-    duration_months int,
+    duration_months SMALLINT,
+    duration_present_months SMALLINT,
+    consecutive SMALLINT,
     PRIMARY KEY (symbol),
     FOREIGN KEY (symbol) REFERENCES company(symbol)
 );

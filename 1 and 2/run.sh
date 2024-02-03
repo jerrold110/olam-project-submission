@@ -10,13 +10,13 @@ DB_NAME="alpha"
 echo 'Creating tables.'
 CREATE_TABLE_SCRIPT="create_tables.sql"
 PSQL_COMMAND="psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -W -f $CREATE_TABLE_SCRIPT"
-#$PSQL_COMMAND
+$PSQL_COMMAND
 
 # Load data into staging
 echo 'Loading staging.'
 STAGE_SCRIPT="load_stage.sql"
 STAGE_COMMAND="psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -W -f $STAGE_SCRIPT"
-#$STAGE_COMMAND
+$STAGE_COMMAND
 
 # Load data from staging into tables
 echo 'Loading tables from staging.'
