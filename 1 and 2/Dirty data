@@ -1,3 +1,12 @@
-Equity column contains string data in the from 500,000
-There are numerical values which are just -
-Free float cap has floats where there should only be ints
+Equity column contains string data in the from 500,000 - in equity_cap
+Floats where there should only be ints - in Free float cap 
+There are numerical values which are just - in monthly_return
+
+There are duplicate rows - ADANIPORTS 2018-01-01
+
+Some symbols have two industries. We have to include this
+But they can only have one name - GRASIM has textiles and cement. CAIRN has 
+ CAIRN  | Oil Exploration
+ CAIRN  | Oil Exploration/Production
+
+Some symbols have two names - TATAMOTORS has its industry in name
