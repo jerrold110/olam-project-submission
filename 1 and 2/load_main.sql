@@ -45,11 +45,8 @@ https://www.postgresql.org/docs/current/sql-alterfunction.html
 */
 -- Drop and create cleaning function for numeric data
 DROP FUNCTION IF EXISTS convert_to_numeric;
-CREATE OR REPLACE FUNCTION convert_to_numeric(input VARCHAR)
-RETURNS NUMERIC
-AS $$
-DECLARE
-    result NUMERIC;
+CREATE OR REPLACE FUNCTION convert_to_numeric(input VARCHAR) RETURNS NUMERIC AS $$
+DECLARE result NUMERIC;
 BEGIN
     -- Try to cast input value to numeric
     BEGIN
