@@ -38,7 +38,7 @@ I considered added an index on (symbol, date) to speed up all time based queries
 This design is normalised to 3NF by meeting the conditions: atomic values, no partial dependencies, no transitive dependencies.
 
 ### Database loading:
-My code can be run with `run.sh` which creates the tables, loads the data into a staging table, cleans the data, and loads into their respective tables.
+My code can be run with `run.sh` which creates the tables, loads the data into a staging table, cleans the data, and loads into their destination tables.
 
 Data is loaded into staging with `load_stage.sql`
 
@@ -54,14 +54,14 @@ Rows with null in symbol or name are dropped and we assume that the right matchi
 - Convert all first letters in every word of the industry column to uppercase and the rest to lowercase 
 - replace '&' with 'AND'
 
-**stock_values table**:
+**Stock_values table**:
 
 There are many values of (symbol,report_date) so using a distinct will not be scalable. Instead I use a window function with row_count to eliminate duplicate rows.
 - Replace all non-numerical values (e.g., '-') with NULL.
 - Convert numeric values with commas (e.g., 5,000) to integer format.
 - Create a cleaning function (convert_to_numeric) to handle numeric conversions for specific columns.
 
-**index_duration table**:
+**Index_duration table**:
 
 Eliminate duplicate rows with the same approach as above.
 - Calculate the start and end dates, duration in months, and the count of present months for each symbol.
