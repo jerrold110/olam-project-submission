@@ -33,7 +33,7 @@ In some columns which are supposed to be numerical, there are some values that a
 
 I considered added an index on (symbol, date) to speed up all time based queries (SMA, high, low, correlation), but the overhead of maintaining this index is too high.
 
-**Index_duration** contains data on the duration that a stock has been inside the NIFTY index and has a primary key on (symbol). I store that starting date, ending date of a stock inside the index as well as the duration in months between these dates, the number months that it was part of the index with duration_present_months because stocks get placed in and taken out of the index, the last column indicates whether the stock was consecutively in the index (0 False, 1 True). I use smallint to store the month data. There is a foreign key on (symbol). If there are errors in the months calculation, we do not need to update the stock_values table.
+**Index_duration** contains data on the duration that a stock has been inside the NIFTY index and has a primary key on (symbol). I store that starting date, ending date of a stock inside the index as well as the duration in months between these dates, the number months that it was part of the index with duration_present_months because stocks get placed in and taken out of the index, the last column indicates whether the stock was consecutively in the index (0 False, 1 True). I use smallint to store the data. There is a foreign key on (symbol). If there are errors in the months calculation, we do not need to update the stock_values table to fix them.
 
 This design is normalised to 3NF by meeting the conditions: atomic values, no partial dependencies, no transitive dependencies.
 
@@ -68,4 +68,4 @@ Eliminate duplicate rows with the same approach as above.
 - Determine the consecutiveness of the data based on the calculated values.
 - -1 is a possible value in `consistency` to detect calculate errors.
 
-The steps in the data loading were designed to ensure cleanliness of the loaded data in the destination table and includes considerations for scaiability by dropping duplicate rows with scalable methods. **There were 50 duplicate rows detected and were not loaded because of these methods.**
+The steps in the data loading were designed to ensure cleanliness of the loaded data in the destination table, includes considerations for scaiability by dropping duplicate rows with scalable methods, and table optimisations to support query performance. **There were 50 duplicate rows detected and were not loaded because of these methods.**
