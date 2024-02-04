@@ -45,20 +45,24 @@ Data is loaded into staging with `load_stage.sql`
 `load_main.sql`creates table company first since it is referred to be other tables.
 
 **Company table**:
+
 Rows with null in symbol or name are dropped and we assume that the right matching of symbol to name is in the remaining rows. Then I use fuzzy string mapping to match the closest name to the symbol to ensure correctness (look in image of TATAMOTORS above)
 - Eliminate rows with null values in the symbol or name columns.
 - Utilize fuzzy string matching (Levenshtein distance) and DISTINCT ON to find the closest symbol match for each name.
 
 **Company_industry table**:
-- Convert all first letters in every word of the industry column to uppercase and the rest to lowercase and reaplce '&' with 'AND'
+- Convert all first letters in every word of the industry column to uppercase and the rest to lowercase 
+* replace '&' with 'AND'
 
 **stock_values table**:
+
 There are many values of (symbol,report_date) so using a distinct will not be scalable. Instead I use a window function with row_count to eliminate duplicate rows.
 - Replace all non-numerical values (e.g., '-') with NULL.
 - Convert numeric values with commas (e.g., 5,000) to integer format.
 - Create a cleaning function (convert_to_numeric) to handle numeric conversions for specific columns.
 
 **index_duration table**:
+
 Eliminate duplicate rows with the same approach as above.
 - Calculate the start and end dates, duration in months, and the count of present months for each symbol.
 - Determine the consecutiveness of the data based on the calculated values.
