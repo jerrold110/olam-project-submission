@@ -42,7 +42,7 @@ My code can be run with `run.sh` which creates the tables, loads the data into a
 
 Data is loaded into staging with `load_stage.sql` with the numerical column data types as VARCHAR which preserves the exact values in the source data, so as to set a foundation for cleaning later on.
 
-`load_main.sql`creates table company first since it is referred to be other tables.
+`load_main.sql` loads the data into the destination tables, it creates table company first since it is referred to be other tables.
 
 **Company table**:
 
