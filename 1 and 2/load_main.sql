@@ -68,7 +68,7 @@ INSERT INTO stock_values
 WITH rowcounts_staging AS (
     SELECT 
     *,
-    COUNT(*) OVER (PARTITION BY (symbol, report_date::DATE)) as row_count
+    ROW_NUMBER() OVER (PARTITION BY (symbol, report_date::DATE)) as row_count
     FROM staging
 )
 SELECT
