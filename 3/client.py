@@ -49,7 +49,7 @@ activity_thread.start()
 # continually receive data from server
 # update persisted data
 while True:
-    # receive up to 1024 bytes from the server using recv()
+    # receive up to 1kb from the server using recv()
     # received data is decoded from bytes to string using utf-8
     data = client_socket.recv(1024).decode('utf-8')
 

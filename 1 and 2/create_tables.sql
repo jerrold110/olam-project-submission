@@ -30,7 +30,8 @@ CREATE INDEX idx_company_symbol ON company(symbol);
 CREATE TABLE IF NOT EXISTS company_industry (
     symbol VARCHAR(100),
     industry VARCHAR(200),
-    PRIMARY KEY (symbol, industry)
+    PRIMARY KEY (symbol, industry),
+    FOREIGN KEY (symbol) REFERENCES company(symbol)
 );
 CREATE INDEX idx_industry ON company_industry(symbol, industry);
 
