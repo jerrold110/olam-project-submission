@@ -40,7 +40,7 @@ This design is normalised to 3NF by meeting the conditions: atomic values, no pa
 ### Database loading:
 My code can be run with `run.sh` which creates the tables, loads the data into a staging table, cleans the data, and loads into their destination tables.
 
-Data is loaded into staging with `load_stage.sql`
+Data is loaded into staging with `load_stage.sql` with the numerical column data types as VARCHAR which preserves the exact values in the source data, so as to set a foundation for cleaning later on.
 
 `load_main.sql`creates table company first since it is referred to be other tables.
 
