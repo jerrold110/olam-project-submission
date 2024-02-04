@@ -52,7 +52,7 @@ Rows with null in symbol or name are dropped and we assume that the right matchi
 
 **Company_industry table**:
 - Convert all first letters in every word of the industry column to uppercase and the rest to lowercase 
-* replace '&' with 'AND'
+- replace '&' with 'AND'
 
 **stock_values table**:
 
