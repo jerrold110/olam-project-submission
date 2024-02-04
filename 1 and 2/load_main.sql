@@ -48,10 +48,9 @@ DROP FUNCTION IF EXISTS convert_to_numeric;
 CREATE OR REPLACE FUNCTION convert_to_numeric(input VARCHAR) RETURNS NUMERIC AS $$
 DECLARE result NUMERIC;
 BEGIN
-    -- Try to cast input value to numeric
+    -- Try to cast input value to numeric, if an exception occurs set result to null
     BEGIN
         result := input::NUMERIC;
-    -- If an exception occurs set result to null
     EXCEPTION
         WHEN OTHERS THEN
             result := NULL;
@@ -75,8 +74,10 @@ WITH rowcounts_staging AS (
 SELECT
     symbol,
     report_date::DATE as report_date,
+    -- This column contains ints with and without , separators
     NULLIF(REPLACE(equity_cap, ',', '')::NUMERIC::BIGINT , NULL) as equity_cap,
     NULLIF(REPLACE(free_float_cap, ',', '')::NUMERIC::INT, NULL) as free_float_cap,
+    -- These columns have non numeric data in them, the cleaning steps are in the above function
     convert_to_numeric(beta) as beta,
     convert_to_numeric(volatility_per) as volatility_per,
     convert_to_numeric(monthly_return) as monthly_return,

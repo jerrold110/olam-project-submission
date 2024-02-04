@@ -1,5 +1,5 @@
 
---
+-- Write query to get year wise number of stocks per industry
 WITH a AS (
 SELECT
     a.symbol,
@@ -19,7 +19,7 @@ FROM
 GROUP BY
     year, industry;
 
--- 
+-- Stocks that were part of index for longest and shortest duration
 WITH a as (
 SELECT
     MAX(duration_present_months) as max,
@@ -34,7 +34,7 @@ WHERE duration_present_months = (select max from a)
 ORDER BY duration_present_months desc, symbol
 ;
 
---
+-- Calculate moving averate for Equity capital of tickers 6 months window. Window size should be adjustable
 DROP FUNCTION IF EXISTS moving_average;
 
 CREATE OR REPLACE FUNCTION moving_average(months INT) 
@@ -60,10 +60,10 @@ BEGIN
 END;
 
 $$ LANGUAGE plpgsql;
--- function call on MA 6 months
-SELECT * FROM moving_average(6);
+SELECT * FROM moving_average(6); -- function call on MA 6 months
 
---
+
+-- Calculate year wise high and low Equity Capital for each stock
 SELECT
 symbol,
 EXTRACT(YEAR FROM report_date) AS year,
@@ -73,10 +73,21 @@ FROM stock_values
 GROUP BY symbol, year
 ORDER BY symbol, year;
 
---
+
+-- Find tickers with highest and highest inverse correlation of price movement
+-- I was unable to do this in SQL and did an implementation of Q3-5 in Python
+
+/*
+Loop over stock symbols
+Create pivot table first
+Calculate correlation
+Get table with columns stock_1, stock_2, correlation
+
 https://www.postgresql.org/docs/current/plpgsql-control-structures.html#PLPGSQL-CONTROL-STRUCTURES-LOOPS
 https://www.postgresql.org/docs/current/plpgsql-control-structures.html#PLPGSQL-RECORDS-ITERATING
-SELECT
+https://www.postgresql.org/docs/current/tablefunc.html
+*/
+
 
 
 
