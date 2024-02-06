@@ -98,7 +98,7 @@ WITH rowcounts_staging AS (
     SELECT 
     symbol,
     report_date,
-    COUNT(*) OVER (PARTITION BY (symbol, report_date::DATE)) as row_count
+    ROW_NUMBER() OVER (PARTITION BY (symbol, report_date::DATE)) as row_count
     FROM staging
 ),
 index_duration_intermediate AS (
